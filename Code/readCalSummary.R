@@ -1,5 +1,9 @@
 library(tidyverse)
 library(googlesheets4)
+library(here)
+library(fs)
+
+dir_create(here(),c("Figs"))
 
 # Load data from Google Sheets
 cal <- read_sheet("https://docs.google.com/spreadsheets/d/1wE-CLEnHa_wNspp9QBUuoT-ItvOiePUIR-9ciDcXANE/edit?gid=487864540#gid=487864540",
@@ -33,6 +37,9 @@ cal.gain <- ggplot(cal, aes(factor(frequency), gain, group = setup, colour = sph
        x = "Freqency (kHz)",
        y = "Gain (dB)")
 
+ggsave(cal.gain, 
+       filename = here("Figs/cal_comp_gain.png"))
+
 # Gain adjustment
 cal.gain.adj <- ggplot(cal, aes(factor(frequency), gain_adj, group = setup, colour = sphere_num)) + 
   geom_line(show.legend = TRUE) + geom_point(show.legend = TRUE) +
@@ -41,3 +48,6 @@ cal.gain.adj <- ggplot(cal, aes(factor(frequency), gain_adj, group = setup, colo
   labs(title = "Gain adjustment",
        x = "Freqency (kHz)",
        y = "Gain (dB)")
+
+ggsave(cal.gain.adj, 
+       filename = here("Figs/cal_comp_gain_adj.png"))
