@@ -47,7 +47,7 @@ cal.gain.adj <- ggplot(cal, aes(factor(frequency), gain_adj, group = setup, colo
   scale_colour_discrete(name = "Sphere") +
   labs(title = "Gain adjustment",
        x = "Freqency (kHz)",
-       y = "Gain (dB)")
+       y = "Gain adjustment (dB)")
 
 ggsave(cal.gain.adj, 
        filename = here("Figs/cal_comp_gain_adj.png"))
